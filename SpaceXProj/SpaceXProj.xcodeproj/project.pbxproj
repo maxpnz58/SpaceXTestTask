@@ -14,7 +14,7 @@
 		352AD4CF2CE9D0240084D150 /* Exceptions for "SpaceXProj" folder in "SpaceXProj" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Other/Info.plist,
+				Info.plist,
 			);
 			target = 352AD4BC2CE9D0210084D150 /* SpaceXProj */;
 		};
