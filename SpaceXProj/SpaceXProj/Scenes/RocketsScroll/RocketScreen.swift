@@ -7,9 +7,11 @@
 
 import UIKit
 
-let dataForUse = rocketsSpaceX()
+let dataForUseRockets = rocketsSpaceX()
 
-class SpaceXInitialScreen: UIViewController {
+class RocketScreen: UIViewController {
+    
+    private weak var navigation: UINavigationController?
     
     let backImage = {
         let image = UIImageView()
@@ -37,13 +39,13 @@ class SpaceXInitialScreen: UIViewController {
         return view
     }()
     
-    let rocketNameLabel = {
-        let label = UILabel()
-        label.font = .systemFont(ofSize: 28, weight: .semibold)
-        label.text = "Falcon Heavy"
-        label.textColor = .white.withAlphaComponent(0.8)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
+    let rocketNameButton: UIButton = {
+        let button = UIButton()
+        button.titleLabel?.font = .systemFont(ofSize: 28, weight: .semibold)
+        //button.setTitle("Falcon Heavy", for: .normal) // Устанавливаем текст через setTitle
+        button.setTitleColor(.white.withAlphaComponent(0.8), for: .normal) // Цвет текста
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
     }()
     
     let rocketSettingsButton = {
@@ -87,14 +89,14 @@ class SpaceXInitialScreen: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.page = pageNumber
-        self.view.backgroundColor = .black
         setupLayout()
         setupData()
+        setupTargets()
     }
-    init(numberOfPage: Int) {
+    init(numberOfPage: Int, navigation: UINavigationController?) {
         super.init(nibName: nil, bundle: nil)
         pageNumber = numberOfPage
+        self.navigation = navigation
     }
 
     required init?(coder: NSCoder) {
@@ -102,20 +104,31 @@ class SpaceXInitialScreen: UIViewController {
     }
 }
 
-extension SpaceXInitialScreen {
+extension RocketScreen {
+    func setupTargets() {
+        rocketNameButton.addTarget(self, action: #selector(rocketNameButtonPressed), for: .touchUpInside)
+    }
+    
+    @objc func rocketNameButtonPressed() {
+        navigation?.pushViewController(LaunchesViewController(rocketName: dataForUseRockets.rockets![pageNumber].id), animated: true)
+    }
+    
     func setupData() {
-        if let image = UIImage(named: dataForUse.rocketPictures[pageNumber]) { backImage.image = image }
-        rocketNameLabel.text = dataForUse.rockets?[pageNumber].name ?? "Not defined"
+        if let image = UIImage(named: dataForUseRockets.rocketPictures[pageNumber]) { backImage.image = image }
+        rocketNameButton.setTitle(dataForUseRockets.rockets?[pageNumber].name ?? "Not defined", for: .normal)
     }
     
     func setupUI() {
+        self.view.backgroundColor = .black
         view.addSubview(backImage)
         view.addSubview(parametrsScrollView)
         parametrsScrollView.addSubview(parametersScrollContentView)
-        parametersScrollContentView.addSubview(rocketNameLabel)
+        parametersScrollContentView.addSubview(rocketNameButton)
         parametersScrollContentView.addSubview(rocketSettingsButton)
         parametersScrollContentView.addSubview(parametersCollectionView)
         parametersScrollContentView.addSubview(tableView)
+        
+        self.tableView.page = pageNumber
     }
     
     func setupLayout() {
@@ -137,16 +150,16 @@ extension SpaceXInitialScreen {
             parametersScrollContentView.widthAnchor.constraint(equalTo: parametrsScrollView.widthAnchor),
             parametersScrollContentView.heightAnchor.constraint(equalToConstant: 800),
             
-            rocketNameLabel.leadingAnchor.constraint(equalTo: parametersScrollContentView.leadingAnchor, constant: 40),
-            rocketNameLabel.topAnchor.constraint(equalTo: parametersScrollContentView.topAnchor, constant: 50),
+            rocketNameButton.leadingAnchor.constraint(equalTo: parametersScrollContentView.leadingAnchor, constant: 40),
+            rocketNameButton.topAnchor.constraint(equalTo: parametersScrollContentView.topAnchor, constant: 50),
             
             rocketSettingsButton.trailingAnchor.constraint(equalTo: parametersScrollContentView.trailingAnchor, constant: -40),
-            rocketSettingsButton.bottomAnchor.constraint(equalTo: rocketNameLabel.bottomAnchor),
+            rocketSettingsButton.bottomAnchor.constraint(equalTo: rocketNameButton.bottomAnchor),
             rocketSettingsButton.heightAnchor.constraint(equalToConstant: 40),
             rocketSettingsButton.widthAnchor.constraint(equalToConstant: 40),
             
             parametersCollectionView.leadingAnchor.constraint(equalTo: parametersScrollContentView.leadingAnchor),
-            parametersCollectionView.topAnchor.constraint(equalTo: rocketNameLabel.bottomAnchor, constant: 20),
+            parametersCollectionView.topAnchor.constraint(equalTo: rocketNameButton.bottomAnchor, constant: 20),
             parametersCollectionView.trailingAnchor.constraint(equalTo: parametersScrollContentView.trailingAnchor),
             parametersCollectionView.heightAnchor.constraint(equalToConstant: 140),
             
@@ -158,21 +171,20 @@ extension SpaceXInitialScreen {
     }
 }
 
-
-extension SpaceXInitialScreen: UICollectionViewDelegate, UICollectionViewDataSource {
+extension RocketScreen: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return dataForUse.rocketCollectionParametersNames[0].count
+        return dataForUseRockets.rocketCollectionParametersNames[0].count
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ParametersCollectionViewCell.identifier, for: indexPath) as? ParametersCollectionViewCell else {
             fatalError("Unable to deque CustomCollectionViewCell in HomeController")
         }
-        cell.configure(param: dataForUse.rocketCollectionParametersNames[0][indexPath.row], meaning: dataForUse.rocketCollectionParameters[pageNumber][indexPath.row] )
+        cell.configure(param: dataForUseRockets.rocketCollectionParametersNames[0][indexPath.row], meaning: dataForUseRockets.rocketCollectionParameters[pageNumber][indexPath.row] )
         return cell
     }
 }
-extension SpaceXInitialScreen:UICollectionViewDelegateFlowLayout {
+extension RocketScreen:UICollectionViewDelegateFlowLayout {
     
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 110, height: 110)

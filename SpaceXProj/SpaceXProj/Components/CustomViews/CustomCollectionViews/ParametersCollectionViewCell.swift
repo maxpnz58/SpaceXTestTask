@@ -7,7 +7,6 @@
 
 import UIKit
 
-
 class ParametersCollectionViewCell: UICollectionViewCell {
     
    static let identifier = "ParametersCollectionViewCell"

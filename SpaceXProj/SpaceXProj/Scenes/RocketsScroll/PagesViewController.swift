@@ -9,13 +9,17 @@ import UIKit
 
 class PagesViewController: UIPageViewController, UIPageViewControllerDataSource {
     
-    let pages = [SpaceXInitialScreen(numberOfPage: 0),SpaceXInitialScreen(numberOfPage: 1), SpaceXInitialScreen(numberOfPage: 2), SpaceXInitialScreen(numberOfPage: 3)]
+    private weak var navigation: UINavigationController?
     
-    public override init(
+    private lazy var pages = [RocketScreen(numberOfPage: 0, navigation: navigation),RocketScreen(numberOfPage: 1, navigation: navigation), RocketScreen(numberOfPage: 2, navigation: navigation), RocketScreen(numberOfPage: 3, navigation: navigation)]
+    
+    public init(
         transitionStyle style: UIPageViewController.TransitionStyle,
         navigationOrientation: UIPageViewController.NavigationOrientation,
-        options: [UIPageViewController.OptionsKey : Any]? = nil
+        options: [UIPageViewController.OptionsKey: Any]? = nil,
+        navigation: UINavigationController
     ) {
+        self.navigation = navigation // Сохраняем navigation
         super.init(transitionStyle: style, navigationOrientation: navigationOrientation, options: options)
     }
     
@@ -32,7 +36,7 @@ class PagesViewController: UIPageViewController, UIPageViewControllerDataSource 
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        guard let index = pages.firstIndex(of: viewController as! SpaceXInitialScreen), index > 0 else {
+        guard let index = pages.firstIndex(of: viewController as! RocketScreen), index > 0 else {
             return nil
         }
         return pages[index - 1]
@@ -40,7 +44,7 @@ class PagesViewController: UIPageViewController, UIPageViewControllerDataSource 
 
     // Следующая страница
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        guard let index = pages.firstIndex(of: viewController as! SpaceXInitialScreen), index < pages.count - 1 else {
+        guard let index = pages.firstIndex(of: viewController as! RocketScreen), index < pages.count - 1 else {
             return nil
         }
         return pages[index + 1]

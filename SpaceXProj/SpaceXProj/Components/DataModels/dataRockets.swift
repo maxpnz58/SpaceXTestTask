@@ -14,7 +14,7 @@ struct RocketParameter: Decodable {
 }
 
 // MARK: - rocketSpaceX
-struct rocketSpaceX: Codable {
+struct rocketSpaceX: Decodable {
     let name: String
     let height:  Diameter
     let diameter: Diameter
@@ -29,9 +29,11 @@ struct rocketSpaceX: Codable {
     let secondStage: SecondStage
     
     let flickrImages: [String]
+    
+    let id: Rocket
 
     enum CodingKeys: String, CodingKey {
-        case name,height, diameter, mass
+        case name,height, diameter, mass, id
         case payloadWeights = "payload_weights"
         
         case costPerLaunch = "cost_per_launch"
@@ -128,7 +130,7 @@ class rocketsSpaceX: Decodable {
             loadRocketBaseParameters()
             print("Боеголовки успешно загружены, сэр! ")
         } catch {
-            print("Дэбил, у тебя ошибка при загрузке или декодировании JSON: \(error)")
+            print("Дэбил, у тебя ошибка при загрузке или декодировании JSON с ракетами: \(error)")
         }
     }
     
@@ -141,6 +143,7 @@ class rocketsSpaceX: Decodable {
                 String(rocket.payloadWeights.first!.kg),
                 ])
             print(rocket.name)
+            print(rocket.id)
         })
     }
     

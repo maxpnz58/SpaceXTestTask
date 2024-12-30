@@ -52,8 +52,8 @@ class ParametersTableView: UITableView, UITableViewDelegate, UITableViewDataSour
             return UITableViewCell()
         }
         
-        let leftText = dataForUse.rocketBaseParameters[page][indexPath.section].parameters[indexPath.row]
-        let rightText = dataForUse.rocketBaseParameters[page][indexPath.section].meanings[indexPath.row]
+        let leftText = dataForUseRockets.rocketBaseParameters[page][indexPath.section].parameters[indexPath.row]
+        let rightText = dataForUseRockets.rocketBaseParameters[page][indexPath.section].meanings[indexPath.row]
 
         cell.setupData(leftText, rightText)
         cell.selectionStyle = .none

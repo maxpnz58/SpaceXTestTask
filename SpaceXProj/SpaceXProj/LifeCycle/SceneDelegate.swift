@@ -14,19 +14,20 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else {return}
-        // Initialize the root view controller
-        let initialViewController = PagesViewController(
-            transitionStyle: .scroll, // Или .scroll
-            navigationOrientation: .horizontal, // Или .vertical
-            options: nil
-        )
-
-        // Embed it in a UINavigationController
-        let navigationController = UINavigationController(rootViewController: initialViewController)
+        
+        let navigation = UINavigationController()
+        navigation.navigationBar.tintColor = .white.withAlphaComponent(0.8)
+        navigation.navigationBar.barTintColor = .clear
+        navigation.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white, .font: UIFont.systemFont(ofSize: 20)]
+    
+        
+        let initialViewController = PagesViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, navigation: navigation)
+        
+        navigation.pushViewController(initialViewController, animated: false)
 
         // Create the window
         let window = UIWindow(windowScene: windowScene)
-        window.rootViewController = navigationController
+        window.rootViewController = navigation
         
         self.window = window
         self.window?.makeKeyAndVisible()
