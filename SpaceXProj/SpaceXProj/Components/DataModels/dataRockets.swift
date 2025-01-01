@@ -90,7 +90,7 @@ struct SecondStage: Codable {
 let rocketBaseParametersNames: [(title: String, parameters: [String], meanings: [String])] = [
     (title: "", parameters: ["Первый запуск","Страна","Стоимость запуска"], meanings: ["7 февраля 2018","США","1 мрд. $"]),
     (title: "ПЕРВАЯ СТУПЕНЬ", parameters: ["К-во двигтелей","К-во топлива","Время сгорания"], meanings: ["3","10000","34"]),
-    (title: "ВТОРАЯ СТПЕНЬ", parameters: ["К-во двигтелей","К-во топлива","Время сгорания"], meanings: ["6","12400","67"]),
+    (title: "ВТОРАЯ СТУПЕНЬ", parameters: ["К-во двигтелей","К-во топлива","Время сгорания"], meanings: ["6","12400","67"]),
 ]
 
 class rocketsSpaceX: Decodable {
@@ -139,9 +139,10 @@ class rocketsSpaceX: Decodable {
             rocketCollectionParameters.append([
                 String(rocket.height.meters!),
                 String(rocket.diameter.meters!),
-                String(rocket.mass.kg),
-                String(rocket.payloadWeights.first!.kg),
+                formatDigitsInt(rocket.mass.kg),
+                formatDigitsInt(rocket.payloadWeights.first!.kg),
                 ])
+            
             print(rocket.name)
             print(rocket.id)
         })
@@ -157,9 +158,9 @@ class rocketsSpaceX: Decodable {
                     "Стоимость запуска"
                 ],
                 meanings: [
-                    String(rocket.firstFlight),
+                    formatData(rocket.firstFlight),
                     String(rocket.country),
-                    String(rocket.costPerLaunch)
+                    formatCurency(rocket.costPerLaunch)
                 ]
             )
             
@@ -172,8 +173,8 @@ class rocketsSpaceX: Decodable {
                 ],
                 meanings: [
                     String(rocket.firstStage.engines),
-                    String(rocket.firstStage.fuelAmountTons),
-                    String(rocket.firstStage.burnTimeSEC ?? 0)
+                    "\(String(rocket.firstStage.fuelAmountTons)) тон",
+                    "\(String(rocket.firstStage.burnTimeSEC ?? 0)) сек"
                 ]
             )
             
@@ -186,13 +187,46 @@ class rocketsSpaceX: Decodable {
                 ],
                 meanings: [
                     String(rocket.secondStage.engines),
-                    String(rocket.secondStage.fuelAmountTons),
-                    String(rocket.secondStage.burnTimeSEC ?? 0)
+                    "\(String(rocket.secondStage.fuelAmountTons)) тон",
+                    "\(String(rocket.secondStage.burnTimeSEC ?? 0)) сек"
                 ]
             )
             
             rocketBaseParameters.append([rocketParameterInitial,rocketParameterOne,rocketParameterTwo])
         }
+    }
+    
+    private func formatData(_ inDate :String) -> String {
+        let inputFormatter = DateFormatter()
+        inputFormatter.dateFormat = "yyyy-MM-dd"
+        inputFormatter.locale = Locale(identifier: "ru_RU")
+        
+        guard let date = inputFormatter.date(from: inDate) else {
+            print("Ошибка: Невозможно преобразовать строку в дату")
+            return inDate
+        }
+        
+        let outputFormatter = DateFormatter()
+        outputFormatter.dateFormat = "d MMMM yyyy"
+        outputFormatter.locale = Locale(identifier: "ru_RU")
+        
+        return outputFormatter.string(from: date)
+    }
+    
+    private func formatCountry(_ :String) -> String {
+        return ""
+    }
+    
+    private func formatCurency(_ inCurrency :Int) -> String {
+        let priceInMillions = Double(inCurrency) / 1_000_000
+        return String(format: "$%.1f млн", priceInMillions)
+    }
+    
+    private func formatDigitsInt(_ inDigit: Int) -> String {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal // Устанавливаем стиль с разделением тысяч
+        numberFormatter.groupingSeparator = "." // Указываем разделитель (например, запятая)
+        return numberFormatter.string(from: NSNumber(value: inDigit)) ?? ""
     }
 }
 

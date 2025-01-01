@@ -14,7 +14,7 @@ class ParametersCollectionViewCell: UICollectionViewCell {
     let cellParameterValue = {
         let label = UILabel()
         label.text = "229.9"
-        label.font = .systemFont(ofSize: 18, weight: .heavy)
+        label.font = .systemFont(ofSize: 16, weight: .heavy)
         label.textColor = .white
         label.translatesAutoresizingMaskIntoConstraints = false
         return label

@@ -14,7 +14,7 @@ class ParametersTableViewCell: UITableViewCell {
         let label  = UILabel()
         label.text = "параметр"
         label.font = .systemFont(ofSize: 16, weight: .medium)
-        label.textColor = .white.withAlphaComponent(0.8)
+        label.textColor = .white.withAlphaComponent(0.6)
         label.textAlignment = .left
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -24,7 +24,7 @@ class ParametersTableViewCell: UITableViewCell {
         let label  = UILabel()
         label.text = "значение"
         label.font = .systemFont(ofSize: 16, weight: .medium)
-        label.textColor = .white.withAlphaComponent(0.8)
+        label.textColor = .white.withAlphaComponent(0.9)
         label.textAlignment = .right
         label.translatesAutoresizingMaskIntoConstraints = false
         return label

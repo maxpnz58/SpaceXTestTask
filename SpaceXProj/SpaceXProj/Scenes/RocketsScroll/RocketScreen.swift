@@ -148,7 +148,7 @@ extension RocketScreen {
             parametersScrollContentView.trailingAnchor.constraint(equalTo: parametrsScrollView.trailingAnchor),
             parametersScrollContentView.bottomAnchor.constraint(equalTo: parametrsScrollView.bottomAnchor),
             parametersScrollContentView.widthAnchor.constraint(equalTo: parametrsScrollView.widthAnchor),
-            parametersScrollContentView.heightAnchor.constraint(equalToConstant: 800),
+            parametersScrollContentView.heightAnchor.constraint(equalToConstant: 850),
             
             rocketNameButton.leadingAnchor.constraint(equalTo: parametersScrollContentView.leadingAnchor, constant: 40),
             rocketNameButton.topAnchor.constraint(equalTo: parametersScrollContentView.topAnchor, constant: 50),

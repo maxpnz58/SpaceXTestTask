@@ -13,7 +13,7 @@ class ParametersTableViewHeaderFooterView: UITableViewHeaderFooterView {
     private let titleLabel = {
         let label =  UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = .white.withAlphaComponent(0.8)
+        label.textColor = .white
         label.font = UIFont.boldSystemFont(ofSize: 20)
         return label
     }()
@@ -34,7 +34,9 @@ class ParametersTableViewHeaderFooterView: UITableViewHeaderFooterView {
         contentView.addSubview(titleLabel)
         
         NSLayoutConstraint.activate([
+            contentView.heightAnchor.constraint(equalTo: titleLabel.heightAnchor, multiplier: 2),
             titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            titleLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
         ])
     }
     
