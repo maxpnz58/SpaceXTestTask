@@ -30,6 +30,7 @@ class PagesViewController: UIPageViewController, UIPageViewControllerDataSource 
     override func viewDidLoad() {
         super.viewDidLoad()
         dataSource = self
+        navigationItem.hidesBackButton = true
         if let firstPage = pages.first {
             setViewControllers([firstPage], direction: .forward, animated: true, completion: nil)
         }

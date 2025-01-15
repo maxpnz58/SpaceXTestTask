@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		3501CBCD2D2ECED8004753E5 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3501CBCC2D2ECED8004753E5 /* SettingsViewController.swift */; };
+		352C09CF2D384EF600F91D7D /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 352C09CE2D384EF600F91D7D /* Lottie */; };
+		352C09D12D384FD700F91D7D /* LaunchScreenAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 352C09D02D384FD700F91D7D /* LaunchScreenAnimationController.swift */; };
+		352C09D72D38550100F91D7D /* rocketAnimation2.json in Resources */ = {isa = PBXBuildFile; fileRef = 352C09D62D38550100F91D7D /* rocketAnimation2.json */; };
 		35B7DD9B2D221FC400768A0B /* fromServerRequestLaunches.json in Resources */ = {isa = PBXBuildFile; fileRef = 35B7DD862D221FC400768A0B /* fromServerRequestLaunches.json */; };
 		35B7DD9C2D221FC400768A0B /* fromServerRequestShips.json in Resources */ = {isa = PBXBuildFile; fileRef = 35B7DD872D221FC400768A0B /* fromServerRequestShips.json */; };
 		35B7DD9D2D221FC400768A0B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 35B7DD8C2D221FC400768A0B /* Assets.xcassets */; };
@@ -30,6 +33,8 @@
 /* Begin PBXFileReference section */
 		3501CBCC2D2ECED8004753E5 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		352AD4BD2CE9D0210084D150 /* SpaceXProj.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpaceXProj.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		352C09D02D384FD700F91D7D /* LaunchScreenAnimationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenAnimationController.swift; sourceTree = "<group>"; };
+		352C09D62D38550100F91D7D /* rocketAnimation2.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = rocketAnimation2.json; sourceTree = "<group>"; };
 		35B7DD782D221FC400768A0B /* ParametersCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParametersCollectionViewCell.swift; sourceTree = "<group>"; };
 		35B7DD7C2D221FC400768A0B /* ParametersTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParametersTableView.swift; sourceTree = "<group>"; };
 		35B7DD7D2D221FC400768A0B /* ParametersTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParametersTableViewCell.swift; sourceTree = "<group>"; };
@@ -55,6 +60,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				352C09CF2D384EF600F91D7D /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -136,6 +142,7 @@
 			children = (
 				35B7DD862D221FC400768A0B /* fromServerRequestLaunches.json */,
 				35B7DD872D221FC400768A0B /* fromServerRequestShips.json */,
+				352C09D62D38550100F91D7D /* rocketAnimation2.json */,
 			);
 			path = JSON;
 			sourceTree = "<group>";
@@ -187,6 +194,7 @@
 			isa = PBXGroup;
 			children = (
 				35B7DD962D221FC400768A0B /* LaunchScreen.storyboard */,
+				352C09D02D384FD700F91D7D /* LaunchScreenAnimationController.swift */,
 			);
 			path = StartScreen;
 			sourceTree = "<group>";
@@ -232,6 +240,7 @@
 			);
 			name = SpaceXProj;
 			packageProductDependencies = (
+				352C09CE2D384EF600F91D7D /* Lottie */,
 			);
 			productName = SpaceXProj;
 			productReference = 352AD4BD2CE9D0210084D150 /* SpaceXProj.app */;
@@ -261,6 +270,9 @@
 			);
 			mainGroup = 352AD4B42CE9D0210084D150;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				352C09CD2D384EF600F91D7D /* XCRemoteSwiftPackageReference "lottie-spm" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 352AD4BE2CE9D0210084D150 /* Products */;
 			projectDirPath = "";
@@ -281,6 +293,7 @@
 				35B7DD9D2D221FC400768A0B /* Assets.xcassets in Resources */,
 				35B7DD9E2D221FC400768A0B /* TimesNewRoman.ttf in Resources */,
 				35B7DD9F2D221FC400768A0B /* LaunchScreen.storyboard in Resources */,
+				352C09D72D38550100F91D7D /* rocketAnimation2.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -300,6 +313,7 @@
 				35B7DDA82D221FC400768A0B /* AppDelegate.swift in Sources */,
 				35B7DDB12D22251B00768A0B /* LaunchCollectionViewCell.swift in Sources */,
 				35B7DDA92D221FC400768A0B /* SceneDelegate.swift in Sources */,
+				352C09D12D384FD700F91D7D /* LaunchScreenAnimationController.swift in Sources */,
 				35B7DDAA2D221FC400768A0B /* LaunchesViewController.swift in Sources */,
 				3501CBCD2D2ECED8004753E5 /* SettingsViewController.swift in Sources */,
 				35B7DDAB2D221FC400768A0B /* PagesViewController.swift in Sources */,
@@ -526,6 +540,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		352C09CD2D384EF600F91D7D /* XCRemoteSwiftPackageReference "lottie-spm" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-spm.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.5.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		352C09CE2D384EF600F91D7D /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 352C09CD2D384EF600F91D7D /* XCRemoteSwiftPackageReference "lottie-spm" */;
+			productName = Lottie;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 352AD4B52CE9D0210084D150 /* Project object */;
 }
