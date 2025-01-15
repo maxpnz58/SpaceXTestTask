@@ -219,13 +219,13 @@ class rocketsSpaceX: Decodable {
     
     private func formatCurency(_ inCurrency :Int) -> String {
         let priceInMillions = Double(inCurrency) / 1_000_000
-        return String(format: "$%.1f млн", priceInMillions)
+        return String(format: "$%.0f млн", priceInMillions)
     }
     
     private func formatDigitsInt(_ inDigit: Int) -> String {
         let numberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = .decimal // Устанавливаем стиль с разделением тысяч
-        numberFormatter.groupingSeparator = "." // Указываем разделитель (например, запятая)
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.groupingSeparator = "."
         return numberFormatter.string(from: NSNumber(value: inDigit)) ?? ""
     }
 }

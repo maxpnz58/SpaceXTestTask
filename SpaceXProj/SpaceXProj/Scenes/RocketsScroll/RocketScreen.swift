@@ -9,7 +9,10 @@ import UIKit
 
 let dataForUseRockets = rocketsSpaceX()
 
-class RocketScreen: UIViewController {
+class RocketScreen: UIViewController, SettingsViewControllerDelegate {
+    func settingsDidUpdate() {
+        print("redrawing")
+    }
     
     private weak var navigation: UINavigationController?
     
@@ -53,6 +56,7 @@ class RocketScreen: UIViewController {
         button.setImage(UIImage(systemName: "gearshape"), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.tintColor = .white
+        button.isUserInteractionEnabled = true
         button.imageView?.contentMode = .scaleAspectFit
         return button
     }()
@@ -107,10 +111,17 @@ class RocketScreen: UIViewController {
 extension RocketScreen {
     func setupTargets() {
         rocketNameButton.addTarget(self, action: #selector(rocketNameButtonPressed), for: .touchUpInside)
+        rocketSettingsButton.addTarget(self, action: #selector(rocketSettingsButtonPressed), for: .touchUpInside)
     }
     
     @objc func rocketNameButtonPressed() {
         navigation?.pushViewController(LaunchesViewController(rocketName: dataForUseRockets.rockets![pageNumber].id), animated: true)
+    }
+    
+    @objc func rocketSettingsButtonPressed() {
+        let vc = SettingsViewController()
+        vc.delegate = self
+        navigation?.present(vc, animated: true)
     }
     
     func setupData() {
